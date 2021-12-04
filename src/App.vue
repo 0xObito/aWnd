@@ -22,13 +22,13 @@
 		<div id="afterMint">
 			<div id="leftPart">
 				<h1>UnStaked</h1>
-				<h2>wizards : {{ unstakedWizards }}</h2>
-				<h2>dragons : {{ unstakedDragons }}</h2>
-				<button id="stakeButton">STAKE AND GUARD !</button>
+				<h2>Wizards : {{ unstakedWizards }}</h2>
+				<h2>Dragons : {{ unstakedDragons }}</h2>
+				<button id="stakeButton">STAKE AND DEFEND !</button>
 				<h3>Select your NFTs to Stake</h3>
 			</div>
 			<div id="middlePart">
-				<h1>Guard The Tower</h1>
+				<h1>Defend The Land</h1>
 				<h2>(STAKE) TO EARN $aGP</h2>
 				<img src="./assets/dragcut.png">
 				<h3>Balance : {{ awndValue }} $aGP</h3>
@@ -36,7 +36,7 @@
 			</div>
 			<div id="rightPart">
 				<h1>Staked</h1>
-				<h2>guarding the tower :<br /> {{ stakedWizards }} Wizards <br /> {{ stakedDragons }} Dragons</h2>
+				<h2>Defending The Land :<br /> {{ stakedWizards }} Wizards <br /> {{ stakedDragons }} Dragons</h2>
 				<button id="claimButton">CLAIM $AWND !</button>
 				<button id="claimAndUnstakeButton">CLAIM $AWND <br />AND UNSTAKE !</button>
 				<h2>unclamed : {{ unclaimedAwnd }} $aGP</h2>
@@ -67,7 +67,7 @@
         <div id="box1" class="box">
           <h1>Wizards</h1>
           <img src="./assets/wizard.png" />
-          <h2>GUARD THE TOWER!</h2>
+          <h2>DEFEND THE LAND!</h2>
           <h3>Join the Guild and earn $AWND</h3>
         </div>
         <div id="box2" class="box">
@@ -192,6 +192,9 @@ header {
 #socials img:hover {
   cursor: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='24px' height='24px' viewBox='0 0 512 512' style='enable-background:new 0 0 512.011 512.011;' xml:space='preserve'%3E %3Cpath fill='white' d='M434.215,344.467L92.881,3.134c-4.16-4.171-10.914-4.179-15.085-0.019  c-2.011,2.006-3.139,4.731-3.134,7.571v490.667c0.003,4.382,2.685,8.316,6.763,9.92c4.081,1.603,8.727,0.545,11.712-2.667  l135.509-145.92h198.016c5.891,0.011,10.675-4.757,10.686-10.648C437.353,349.198,436.226,346.473,434.215,344.467z'/%3E %3C/svg%3E"),
     pointer;
+}
+audio{
+	style: none;
 }
 #middlePart, #leftPart, #rightPart{
 	width: 300px;
