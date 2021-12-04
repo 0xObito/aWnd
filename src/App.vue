@@ -71,7 +71,7 @@
           <h3>Join the Guild and earn $AWND</h3>
         </div>
         <div id="box2" class="box">
-          <h1>Dragon</h1>
+          <h1>Dragons</h1>
           <img src="./assets/dragon.png" />
           <h3>Dragons steal new mints & earn $AWND from wizards</h3>
         </div>
