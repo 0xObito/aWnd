@@ -19,6 +19,24 @@
     </header>
     <section>
       <div id="text">
+		<div id="stakingOn">
+			<h1>Choose the units who will defend your lands</h1>
+			<div id="stakingBox">
+			<h2>Wizards :</h2>
+			<div id="boxStake1">
+			<h3><button class="numberButton" @click="changeStakeWizard(0)">-</button></h3>
+			<h3 id="nMint">{{ toStakeWizards }}</h3>
+			<h3><button class="numberButton" @click="changeStakeWizard(1)">+</button></h3>
+			</div>
+			<h2>Dragons :</h2>
+			<div id="boxStake2">
+			<h3><button class="numberButton" @click="changeStakeDrake(0)">-</button></h3>
+			<h3 id="nMint">{{ toStakeDragons }}</h3>
+			<h3><button class="numberButton" @click="changeStakeDrake(1)">+</button></h3>
+			</div>
+			</div>
+			<button id="doneButton">done</button>
+		</div>
 		<div id="afterMint">
 			<div id="leftPart">
 				<h1>UnStaked</h1>
@@ -37,8 +55,8 @@
 			<div id="rightPart">
 				<h1>Staked</h1>
 				<h2>Defending The Land :<br /> {{ stakedWizards }} Wizards <br /> {{ stakedDragons }} Dragons</h2>
-				<button id="claimButton">CLAIM $AWND !</button>
-				<button id="claimAndUnstakeButton">CLAIM $AWND <br />AND UNSTAKE !</button>
+				<button id="claimButton">CLAIM $aGP !</button>
+				<button id="claimAndUnstakeButton">CLAIM $aGP <br />AND UNSTAKE !</button>
 				<h2>unclamed : {{ unclaimedAwnd }} $aGP</h2>
 				<h3>Select your NFTs to claim rewards</h3>
 			</div>
@@ -97,12 +115,14 @@ export default {
 			progression: "GEN-0",
 			mintNumber: 1,
 			actualPrice: 2,
-			unstakedWizards: 0,
-			unstakedDragons: 0,
+			unstakedWizards: 10,
+			unstakedDragons: 10,
 			awndValue: 1000,
 			unclaimedAwnd: 300,
 			stakedWizards: 2,
 			stakedDragons: 10,
+			toStakeWizards: 0,
+			toStakeDragons: 0,
 		}
   },
   computed: {
@@ -138,6 +158,28 @@ export default {
 	mintMethod() {
 		
 	},
+	changeStakeWizard(type){
+		if(type == 0)
+		{
+			if (this.toStakeWizards > 0)
+				this.toStakeWizards--;
+		}
+		else{
+			if (this.unstakedWizards > this.toStakeWizards)
+				this.toStakeWizards++;
+		}
+	},
+	changeStakeDrake(type){
+		if(type == 0)
+		{
+			if (this.toStakeDragons > 0)
+				this.toStakeDragons--;
+		}
+		else{
+			if (this.unstakedDragons > this.toStakeDragons)
+				this.toStakeDragons++;
+		}
+	},
   },
 };
 window.onload=function(){
@@ -147,6 +189,9 @@ let mintWindow = document.querySelector("#mintOn");
 let	mButton = document.querySelector("#mButton");
 let afterMintWindow = document.querySelector("#afterMint");
 let mintMore = document.querySelector("#mintMore");
+let doneButton = document.querySelector("#doneButton");
+let stakeButton = document.querySelector("#stakeButton");
+let stakingOn = document.querySelector("#stakingOn");
 mintButton.addEventListener("click", function(){
 	homeWindow.style.display="none";
 	mintWindow.style.display="flex";
@@ -158,7 +203,16 @@ mButton.addEventListener("click", function() {
 mintMore.addEventListener("click", function() {
 	mintWindow.style.display="flex";
 	afterMintWindow.style.display="none";
-})}
+}),
+stakeButton.addEventListener("click", function() {
+	afterMintWindow.style.display="none";
+	stakingOn.style.display="flex";
+}),
+doneButton.addEventListener("click", function() {
+	stakingOn.style.display="none";
+	afterMintWindow.style.display="flex";
+})
+};
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap");
@@ -173,6 +227,18 @@ mintMore.addEventListener("click", function() {
 @font-face {
   font-family: "cotton";
   src: url("./font/coco.ttf");
+}
+@font-face {
+  font-family: "flower";
+  src: url("./font/flower.ttf");
+}
+@font-face {
+  font-family: "gernika";
+  src: url("./font/Gernika.otf");
+}
+@font-face {
+  font-family: "fab";
+  src: url("./font/fab.ttf");
 }
 #phonemsg {
   display: none;
@@ -193,8 +259,54 @@ header {
   cursor: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='24px' height='24px' viewBox='0 0 512 512' style='enable-background:new 0 0 512.011 512.011;' xml:space='preserve'%3E %3Cpath fill='white' d='M434.215,344.467L92.881,3.134c-4.16-4.171-10.914-4.179-15.085-0.019  c-2.011,2.006-3.139,4.731-3.134,7.571v490.667c0.003,4.382,2.685,8.316,6.763,9.92c4.081,1.603,8.727,0.545,11.712-2.667  l135.509-145.92h198.016c5.891,0.011,10.675-4.757,10.686-10.648C437.353,349.198,436.226,346.473,434.215,344.467z'/%3E %3C/svg%3E"),
     pointer;
 }
-audio{
-	style: none;
+#stakingOn{
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+#stakingOn h1{
+	margin: 0;
+	font-family: gernika;
+	color: white;
+}
+#stakingOn h2{
+	color: rgba(177, 0, 0, 0.5);
+	font-size: 0.7em;
+	margin-bottom: 0px;
+	margin: 0px;
+	font-family: Poppins;
+}
+#doneButton{
+	font-family: gernika;
+	color: white;
+}
+#stakingOn button:hover{
+	background: rgba(177, 0, 0, 0.5);
+}
+#stakingOn button{
+	background: transparent;
+	border: 3px rgba(177, 0, 0, 0.5) solid;
+	border-radius: 70px;
+	width: 200px;
+	height: 70px;
+	font-size: 1em;
+}
+#stakingOn h3{
+	font-size: 1em;
+	margin: 0;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+#boxStake1, #boxStake2{
+	display: flex;
+	justify-content: center;
+	height: 70px;
+}
+#stakingBox{
+	display: flex;
+	flex-direction: column;
 }
 #middlePart, #leftPart, #rightPart{
 	width: 300px;
@@ -217,16 +329,16 @@ audio{
 	list-style: none;
 }
 #leftPart h1, #rightPart h1{
-	font-size: 1em;
-	font-family: futura;
+	font-size: 1.1em;
+	font-family: gernika;
 	color: rgb(255, 103, 103);
 	text-decoration: underline;
 	line-height: 0.4em;
 }
 #middlePart h1{
 	text-decoration: underline;
-	font-size: 0.9em;
-	font-family: futura;
+	font-size: 1.1em;
+	font-family: gernika;
 	color: rgb(255, 103, 103);
 	line-height: 0.9em;
 }
@@ -234,8 +346,10 @@ audio{
 	font-size: 0.5em;
 	margin: 0;
 	margin-bottom: 20px;
+	font-family: fab;
 }
 #afterMint h3{
+	font-family: fab;
 	font-size: 0.5em;
 	margin: 0;
 }
@@ -253,7 +367,7 @@ audio{
 	border: 3px solid white;
 	color: white;
 	border-radius: 60px;
-	font-family: cotton;
+	font-family: gernika;
 	font-size: 0.6em;
 	line-height: 1em;
 }
@@ -279,7 +393,7 @@ audio{
 	border: 2px white solid;
 	color: white;
 	font-size: 1em;
-	font-family: cotton;
+	font-family: gernika;
 	line-height: 1em;
 }
 #mintOn button:hover{
@@ -295,7 +409,6 @@ audio{
 	justify-content: space-around;
 }
 #mintOn{
-	font-family: Poppins;
 	display: none;
 	flex-direction: column;
 	align-items: center;
@@ -315,17 +428,19 @@ audio{
 	color: white;
 }
 #mintOn h1{
-	font-size: 1.6em;
-	font-family: cotton;
-	line-height: 1em;
+	font-size: 1.4em;
+	font-family: flower;
+	line-height: 1.5em;
 	margin-bottom: 10px;
 }
 #mintOn h3{
 	font-size: 0.7em;
 	margin-bottom: 10px;
+	font-family: gernika;
 }
 #mintOn h2{
-	font-size: 0.5em;
+	font-family: fab;
+	font-size: 0.6em;
 	margin-bottom: 0;
 	color: rgb(255, 103, 103);
 }
