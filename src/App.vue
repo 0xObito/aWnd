@@ -172,7 +172,7 @@ mintMore.addEventListener("click", function() {
 }
 @font-face {
   font-family: "cotton";
-  src: url("./font/cotton.ttf");
+  src: url("./font/coco.ttf");
 }
 #phonemsg {
   display: none;
@@ -243,7 +243,7 @@ header {
 #mintTitle{
 	font-family: cotton;
 	line-height: 1em;
-	font-size: 2em;
+	font-size: 1.5em;
 }
 #afterMint button{
 	background: transparent;
@@ -251,7 +251,7 @@ header {
 	color: white;
 	border-radius: 60px;
 	font-family: cotton;
-	font-size: 0.7em;
+	font-size: 0.6em;
 	line-height: 1em;
 }
 #claimButton, #stakeButton{
@@ -275,7 +275,7 @@ header {
 	border-radius: 60px;
 	border: 2px white solid;
 	color: white;
-	font-size: 1.3em;
+	font-size: 1em;
 	font-family: cotton;
 	line-height: 1em;
 }
@@ -463,7 +463,7 @@ section {
   text-align: center;
 }
 .box h1 {
-  font-size: 1.3em;
+  font-size: 1.2em;
   letter-spacing: 10px;
   margin: 0;
 }
