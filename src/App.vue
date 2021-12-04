@@ -4,7 +4,7 @@
     Dear sorcerer, please come back on a computer to fully enjoy the experience.
   </h1>
   <div id="home">
-	  <!-- VIDEO BACKGROUND -->
+	<!-- VIDEO BACKGROUND -->
     <video autoplay muted loop id="dragvid">
       <source src="./assets/dragvid4.mp4" type="video/mp4" />
     </video>
@@ -16,14 +16,14 @@
         <a target="_blank" href=""><img id="ope" src="./assets/nft.png" /></a>
         <a target="_blank" href=""><img id="scan" src="./assets/scan.png" /></a>
       </div>
-	  <!-- WALLET CONNECTION -->
+	<!-- WALLET CONNECTION -->
       <div id="wallet">
         <button id="conWallet" @click="changeMessage(connecting)">{{ connectMessage }}</button>
       </div>
     </header>
     <section>
       <div id="text">
-		  <!-- STAKING INTERFACE -->
+		<!-- STAKING INTERFACE -->
 		<div id="stakingOn">
 			<h1>Choose the units who will defend your lands</h1>
 			<div id="stakingBox">
@@ -191,6 +191,7 @@ export default {
   },
 };
 window.onload=function(){
+let alreadyMinted = 0;
 let mintButton = document.querySelector("#mintbut");
 let homeWindow = document.querySelector("#noMint");
 let mintWindow = document.querySelector("#mintOn");
@@ -201,8 +202,17 @@ let doneButton = document.querySelector("#doneButton");
 let stakeButton = document.querySelector("#stakeButton");
 let stakingOn = document.querySelector("#stakingOn");
 mintButton.addEventListener("click", function(){
-	homeWindow.style.display="none";
-	mintWindow.style.display="flex";
+	if (alreadyMinted == 0)
+	{
+		homeWindow.style.display="none";
+		mintWindow.style.display="flex";
+		alreadyMinted == 1;
+	}
+	else
+	{
+		homeWindow.style.display="none";
+		afterMintWindow.style.display="flex";
+	}
 }),
 mButton.addEventListener("click", function() {
 	mintWindow.style.display="none";
@@ -276,6 +286,7 @@ header {
 }
 #stakingOn h1{
 	margin: 0;
+	font-size: 1.2em;
 	font-family: gernika;
 	color: white;
 }
