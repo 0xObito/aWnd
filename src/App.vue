@@ -1,24 +1,29 @@
 <template>
+<!-- LOW RESOLUTION MSG -->
   <h1 id="phonemsg">
     Dear sorcerer, please come back on a computer to fully enjoy the experience.
   </h1>
   <div id="home">
+	  <!-- VIDEO BACKGROUND -->
     <video autoplay muted loop id="dragvid">
       <source src="./assets/dragvid4.mp4" type="video/mp4" />
     </video>
     <header>
+		<!-- SOCIALS HEADER LEFT -->
       <div id="socials">
         <a target="_blank" href="https://twitter.com/AvaxWnd"><img id="twi" src="./assets/twi.png" /></a>
         <a target="_blank" href="https://discord.gg/6cXDfcDaR5"><img id="disc" src="./assets/disc.png" /></a>
         <a target="_blank" href=""><img id="ope" src="./assets/nft.png" /></a>
         <a target="_blank" href=""><img id="scan" src="./assets/scan.png" /></a>
       </div>
+	  <!-- WALLET CONNECTION -->
       <div id="wallet">
         <button id="conWallet" @click="changeMessage(connecting)">{{ connectMessage }}</button>
       </div>
     </header>
     <section>
       <div id="text">
+		  <!-- STAKING INTERFACE -->
 		<div id="stakingOn">
 			<h1>Choose the units who will defend your lands</h1>
 			<div id="stakingBox">
@@ -37,6 +42,7 @@
 			</div>
 			<button id="doneButton">done</button>
 		</div>
+		<!-- AFTER MINT INTERFACE -->
 		<div id="afterMint">
 			<div id="leftPart">
 				<h1>UnStaked</h1>
@@ -61,6 +67,7 @@
 				<h3>Select your NFTs to claim rewards</h3>
 			</div>
 		</div>
+		<!-- MINTING INTERFACE -->
 		<div id="mintOn">
 		<h1>Minting</h1>
 		<h3 id="descMint">Your valuable gold pieces may now be placed onto the transmutation table</h3>
@@ -74,6 +81,7 @@
 		<button id="mButton" @click="mintMethod()">Mint Now</button>
 		<h2>Price : {{ actualPrice }} $AVAX</h2>
 		</div>
+		<!-- HOME & NOMINT INTERFACE -->
 		<div id="noMint">
         <h1 id="mintTitle">Wizards and Dragons</h1>
         <div id="mint">
