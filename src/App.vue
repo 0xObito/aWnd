@@ -1,4 +1,5 @@
 <template>
+<!-- SEND ME A MESSAGE IF YOU NEED ANY INFOS -->
 <!-- LOW RESOLUTION MSG -->
   <h1 id="phonemsg">
     Dear sorcerer, please come back on a computer to fully enjoy the experience.
@@ -28,19 +29,22 @@
 			<h1>Choose the units who will defend your lands</h1>
 			<div id="stakingBox">
 			<h2>Wizards :</h2>
-			<div id="boxStake1">
-			<h3><button class="numberButton" @click="changeStakeWizard(0)">-</button></h3>
-			<h3 id="nMint">{{ toStakeWizards }}</h3>
-			<h3><button class="numberButton" @click="changeStakeWizard(1)">+</button></h3>
-			</div>
+			<div id="wizStake"><img @click="changeSelectedWizard(item)" v-for="item in wizardUnstakedArray" :key="item.image" :src="item.image"></div>
 			<h2>Dragons :</h2>
-			<div id="boxStake2">
-			<h3><button class="numberButton" @click="changeStakeDrake(0)">-</button></h3>
-			<h3 id="nMint">{{ toStakeDragons }}</h3>
-			<h3><button class="numberButton" @click="changeStakeDrake(1)">+</button></h3>
-			</div>
+			<div id="dragStake"><img @click="changeSelectedDragon(item)" v-for="item in dragonUnstakedArray" :key="item.image" :src="item.image"></div>
 			</div>
 			<button id="doneButton">done</button>
+		</div>
+		<!-- UNSTAKING INTERFACE -->
+		<div id="unstakingOn">
+			<h1>Choose the units who will retire form your lands</h1>
+			<div id="unstakingBox">
+			<h2>Wizards :</h2>
+			<div id="wizUnstake"><img @click="changeSelectedUnstakedWizard(item)" v-for="item in wizardStakedArray" :key="item.image" :src="item.image"></div>
+			<h2>Dragons :</h2>
+			<div id="dragUnstake"><img @click="changeSelectedUnstakedDragon(item)" v-for="item in dragonStakedArray" :key="item.image" :src="item.image"></div>
+			</div>
+			<button id="doneButton2">done</button>
 		</div>
 		<!-- AFTER MINT INTERFACE -->
 		<div id="afterMint">
@@ -131,6 +135,84 @@ export default {
 			stakedDragons: 10,
 			toStakeWizards: 0,
 			toStakeDragons: 0,
+			dragonUnstakedArray: [
+				{
+					selected: 0,
+					image: require("./assets/dragon.png"),
+					index: 0
+				},
+				{
+					selected: 0,
+					image: require("./assets/dragon.png"),
+					index: 1
+				},
+				{
+					selected: 0,
+					image: require("./assets/dragon.png"),
+					index: 2
+				},
+			],
+			wizardUnstakedArray: [
+				{
+					selected: 0,
+					image: require("./assets/wizard.png"),
+					index: 0
+				},
+				{
+					selected: 0,
+					image: require("./assets/wizard.png"),
+					index: 1
+				},
+				{
+					selected: 0,
+					image: require("./assets/wizard.png"),
+					index: 2
+				},
+				{
+					selected: 0,
+					image: require("./assets/wizard.png"),
+					index: 3
+				},
+				{
+					selected: 0,
+					image: require("./assets/wizard.png"),
+					index: 4
+				},
+			],
+			dragonStakedArray: [
+				{
+					selected: 0,
+					image: require("./assets/dragon.png"),
+					index: 0
+				},
+				{
+					selected: 0,
+					image: require("./assets/dragon.png"),
+					index: 1
+				},
+				{
+					selected: 0,
+					image: require("./assets/dragon.png"),
+					index: 2
+				},
+			],
+			wizardStakedArray: [
+				{
+					selected: 0,
+					image: require("./assets/wizard.png"),
+					index: 0
+				},
+				{
+					selected: 0,
+					image: require("./assets/wizard.png"),
+					index: 1
+				},
+				{
+					selected: 0,
+					image: require("./assets/wizard.png"),
+					index: 2
+				},
+			]
 		}
   },
   computed: {
@@ -188,6 +270,62 @@ export default {
 				this.toStakeDragons++;
 		}
 	},
+	changeSelectedDragon(item){
+		console.log(item);
+		let dragStake = document.querySelector("#dragStake").childNodes;
+		if (item.selected == 1)
+		{
+			item.selected = 0;
+			dragStake[item.index + 1].style.borderColor="black";
+		}
+		else
+		{
+			item.selected = 1;
+			dragStake[item.index + 1].style.borderColor="white";
+		}
+	},
+	changeSelectedWizard(item){
+		let wizStake = document.querySelector("#wizStake").childNodes;
+		console.log(item);
+		if(item.selected == 1)
+		{
+			wizStake[item.index + 1].style.borderColor="black";
+			item.selected = 0;
+		}
+		else
+		{
+			item.selected = 1;
+			wizStake[item.index + 1].style.borderColor="white";
+		}
+	},
+	changeSelectedUnstakedWizard(item){
+		let wizUnstake = document.querySelector("#wizUnstake").childNodes;
+		console.log(item);
+		if(item.selected == 1)
+		{
+			wizUnstake[item.index + 1].style.borderColor="black";
+			item.selected = 0;
+		}
+		else
+		{
+			item.selected = 1;
+			wizUnstake[item.index + 1].style.borderColor="white";
+		}
+	},
+	changeSelectedUnstakedDragon(item){
+		let dragUnstake = document.querySelector("#dragUnstake").childNodes;
+		console.log(item);
+		if(item.selected == 1)
+		{
+			dragUnstake[item.index + 1].style.borderColor="black";
+			item.selected = 0;
+		}
+		else
+		{
+			item.selected = 1;
+			dragUnstake[item.index + 1].style.borderColor="white";
+		}
+	}
   },
 };
 window.onload=function(){
@@ -201,6 +339,9 @@ let mintMore = document.querySelector("#mintMore");
 let doneButton = document.querySelector("#doneButton");
 let stakeButton = document.querySelector("#stakeButton");
 let stakingOn = document.querySelector("#stakingOn");
+let unstakeButton = document.querySelector("#claimAndUnstakeButton");
+let unstakingOn = document.querySelector("#unstakingOn");
+let doneButton2 = document.querySelector("#doneButton2");
 mintButton.addEventListener("click", function(){
 	if (alreadyMinted == 0)
 	{
@@ -228,6 +369,14 @@ stakeButton.addEventListener("click", function() {
 }),
 doneButton.addEventListener("click", function() {
 	stakingOn.style.display="none";
+	afterMintWindow.style.display="flex";
+}),
+unstakeButton.addEventListener("click", function() {
+	afterMintWindow.style.display="none";
+	unstakingOn.style.display="flex";
+}),
+doneButton2.addEventListener("click", function() {
+	unstakingOn.style.display="none";
 	afterMintWindow.style.display="flex";
 })
 };
@@ -277,16 +426,138 @@ header {
   cursor: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='24px' height='24px' viewBox='0 0 512 512' style='enable-background:new 0 0 512.011 512.011;' xml:space='preserve'%3E %3Cpath fill='white' d='M434.215,344.467L92.881,3.134c-4.16-4.171-10.914-4.179-15.085-0.019  c-2.011,2.006-3.139,4.731-3.134,7.571v490.667c0.003,4.382,2.685,8.316,6.763,9.92c4.081,1.603,8.727,0.545,11.712-2.667  l135.509-145.92h198.016c5.891,0.011,10.675-4.757,10.686-10.648C437.353,349.198,436.226,346.473,434.215,344.467z'/%3E %3C/svg%3E"),
     pointer;
 }
+#unstakingOn::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #616161;
+}
+
+#unstakingOn::-webkit-scrollbar
+{
+	width: 12px;
+	border-radius: 10px;
+	background-color: #ff7a7a;
+}
+#unstakingOn::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgba(204, 0, 0, 0.8);
+}
+#doneButton2{
+	margin-bottom: 20px;
+}
+#wizUnstake img, #dragUnstake img{
+	border: 3px rgba(0, 0, 0, 0.5) solid;
+	border-radius: 30px;
+	height: 70px;
+	width: 80px;
+}
+#wizUnstake, #dragUnstake{
+	width: 1000px;
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 10px;
+	margin-left: 80px;
+}
+#unstakingOn{
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	overflow: auto;
+}
+#unstakingOn h1{
+	margin: 0;
+	margin-top: 30px;
+	font-size: 1.1em;
+	font-family: gernika;
+	color: white;
+}
+#unstakingOn h2{
+	color: rgba(177, 0, 0, 0.5);
+	font-size: 0.7em;
+	margin-bottom: 0px;
+	margin: 0px;
+	font-family: Poppins;
+}
+#doneButton2{
+	font-family: gernika;
+	color: white;
+}
+#unstakingOn button:hover{
+	background: rgba(177, 0, 0, 0.5);
+}
+#unstakingOn button{
+	background: transparent;
+	border: 3px rgba(177, 0, 0, 0.5) solid;
+	border-radius: 70px;
+	width: 200px;
+	height: 70px;
+	font-size: 1em;
+}
+#unstakingOn h3{
+	font-size: 1em;
+	margin: 0;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+#unstakingBox{
+	display: flex;
+	flex-direction: column;
+}
+
+
+#stakingOn::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #616161;
+}
+
+#stakingOn::-webkit-scrollbar
+{
+	width: 12px;
+	border-radius: 10px;
+	background-color: #ff7a7a;
+}
+
+#stakingOn::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgba(204, 0, 0, 0.8);
+}
+#doneButton{
+	margin-bottom: 20px;
+}
+#wizStake img, #dragStake img{
+	border: 3px rgba(0, 0, 0, 0.5) solid;
+	border-radius: 30px;
+	height: 70px;
+	width: 80px;
+}
+#wizStake, #dragStake{
+	width: 1000px;
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 10px;
+	margin-left: 80px;
+}
 #stakingOn{
 	display: none;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	overflow: auto;
 }
 #stakingOn h1{
 	margin: 0;
-	font-size: 1.2em;
+	margin-top: 30px;
+	font-size: 1.1em;
 	font-family: gernika;
 	color: white;
 }
