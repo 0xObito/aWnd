@@ -24,6 +24,27 @@
     </header>
     <section>
       <div id="text">
+		<!-- GAME STATS INTERFACE -->
+		<div id="statsOn">
+			<h3>GAME STATS</h3>
+			<div id="tabs">
+			<div id="leftTab">
+				<h2>Wizards Minted : {{ wizardMintedValue }}</h2>
+				<h2>Wizards Staked : {{ wizardStakedValue }}</h2>
+				<h2>Dragons Minted : {{ dragonsMintedValue }}</h2>
+				<h2>Dragons Staked : {{ dragonsStakedValue }}</h2>
+				<h1>Total % Staked : {{ totalStakedPercentage }}</h1>
+			</div>
+			<div id="rightTab">
+				<h2>Wizards Stolen : {{ stolenWizardsValue }}</h2>
+				<h2>Dragons Stolen : {{ stolenDragonsValue }}</h2>
+				<h2>$aGP CLAIMED : {{ agpClaimedValue }}</h2>
+				<h2>$aGP BURNED : {{ agpBurnedValue }}</h2>
+				<h1>$aGP EMISSION : {{ agpTotalEmissionValue }}%</h1>
+			</div>
+			</div>
+			<button id="backButton">Back</button>
+		</div>
 		<!-- STAKING INTERFACE -->
 		<div id="stakingOn">
 			<h1>Choose the units who will defend your lands</h1>
@@ -54,6 +75,7 @@
 				<h2>Dragons : {{ unstakedDragons }}</h2>
 				<button id="stakeButton">STAKE AND DEFEND !</button>
 				<h3>Select your NFTs to Stake</h3>
+				<button id="statsButton">Check GAME STATS by clicking there</button>
 			</div>
 			<div id="middlePart">
 				<h1>Defend The Land</h1>
@@ -126,7 +148,7 @@ export default {
 			totalSupply: 10000,
 			progression: "GEN-0",
 			mintNumber: 1,
-			actualPrice: 2,
+			actualPrice: 2.5,
 			unstakedWizards: 10,
 			unstakedDragons: 10,
 			awndValue: 1000,
@@ -135,6 +157,16 @@ export default {
 			stakedDragons: 10,
 			toStakeWizards: 0,
 			toStakeDragons: 0,
+			wizardMintedValue: 9000,
+			wizardStakedValue: 8500,
+			dragonsMintedValue: 1000,
+			dragonsStakedValue: 990,
+			totalStakedPercentage: 92,
+			stolenWizardsValue: 600,
+			stolenDragonsValue: 100,
+			agpClaimedValue: 999999999,
+			agpBurnedValue: 999999999,
+			agpTotalEmissionValue: 20,
 			dragonUnstakedArray: [
 				{
 					selected: 0,
@@ -342,6 +374,9 @@ let stakingOn = document.querySelector("#stakingOn");
 let unstakeButton = document.querySelector("#claimAndUnstakeButton");
 let unstakingOn = document.querySelector("#unstakingOn");
 let doneButton2 = document.querySelector("#doneButton2");
+let statsButton = document.querySelector("#statsButton");
+let statsOn = document.querySelector("#statsOn");
+let backButton = document.querySelector("#backButton");
 mintButton.addEventListener("click", function(){
 	if (alreadyMinted == 0)
 	{
@@ -377,6 +412,14 @@ unstakeButton.addEventListener("click", function() {
 }),
 doneButton2.addEventListener("click", function() {
 	unstakingOn.style.display="none";
+	afterMintWindow.style.display="flex";
+}),
+statsButton.addEventListener("click", function() {
+	afterMintWindow.style.display="none";
+	statsOn.style.display="flex";
+}),
+backButton.addEventListener("click", function() {
+	statsOn.style.display="none";
 	afterMintWindow.style.display="flex";
 })
 };
@@ -432,7 +475,51 @@ header {
 	border-radius: 10px;
 	background-color: #616161;
 }
-
+#leftTab, #rightTab{
+	width: 350px;
+}
+#statsOn h2{
+	font-size: 0.5em;
+	font-family: gernika;
+}
+#statsOn h1{
+	font-size: 0.7em;
+	font-family: fab;
+	border: 2px rgb(255, 85, 85) solid;
+	height: 40px;
+}
+#statsOn h3{
+	color: rgb(255, 92, 92);
+	font-family: flower;
+	margin: 15px;
+}
+#statsOn button{
+	background: transparent;
+	border: 3px solid white;
+	width: 300px;
+	border-radius: 70px;
+	height: 70px;
+	color: white;
+	font-size: 0.8em;
+	font-family: gernika;
+}
+#statsOn button:hover{
+	background: white;
+	color: black;
+}
+#statsOn{
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#tabs{
+	display: flex;
+}
+#statsButton{
+	position: relative;
+	top: 20px;
+}
 #unstakingOn::-webkit-scrollbar
 {
 	width: 12px;
